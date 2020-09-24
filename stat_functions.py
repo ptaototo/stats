@@ -1,35 +1,35 @@
-from math import comb
-from math import factorial
-from math import e
-
+import math
 
 class DiscProb:
     def __init__(self):
-        pass
-
-    def bin(x, n, p):
-        return comb(n, x)*pow(p,x)*pow(1-p,n-x)
-
-    def Bin(y, n, p):
-        sum = 0
-        for i in range(0, y+1):
-            sum += bin(i, n, p)
-        return sum
-
-    def poisson(x, u):
-        return (pow(e, -u)*pow(u, x))/(factorial(x))
-
-    def sumPoisson(n, u):
-        sum = 0
-        for i in range(0, n+1):
-            sum += poisson(i,u)
-        return sum
+        self.sum = 0
     
-    def negbin(x, r, p):
-        return comb(x+r-1, r-1)*pow(p, r)*pow(1-p,x)
+    # Binomial function
+    def bin(self, x, n, p):
+        return math.comb(n, x) * pow(p,x) * pow(1 - p,n - x)
+    
+    # Sum of binomials
+    def Bin(self, y, n, p):
+        self.sum = 0
+        for i in range(0, y+1):
+            self.sum += self.bin(i, n, p)
+        return self.sum
+    
+    # Poisson distribution
+    def poisson(self, x, u):
+        return (pow(math.e, -u) * pow(u, x)) / (math.factorial(x))
 
-    def sumNegbin(n, r, p):
-        sum = 0
+    def sumPoisson(self, n, u):
+        self.sum = 0
         for i in range(0, n+1):
-            sum += negbin(i, r, p)
-        return sum
+            self.sum += self.poisson(i, u)
+        return self.sum
+    # Negative binomial distribution
+    def negbin(self, x, r, p):
+        return math.comb(x + r - 1, r - 1)*pow(p, r)*pow(1 - p,x)
+
+    def sumNegbin(self, n, r, p):
+        self.sum = 0
+        for i in range(0, n+1):
+            self.sum += self.negbin(i, r, p)
+        return self.sum
